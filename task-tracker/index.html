@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Task Tracker</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+    <div class="container">
+
+      <!-- Page header -->
+      <h1 class="app-title">My Task Tracker</h1>
+      <p class="app-subtitle">Stay on top of what matters.</p>
+
+      <!-- Input area: where the user types a new task -->
+      <div class="input-row">
+        <input
+          type="text"
+          id="taskInput"
+          placeholder="What do you need to do?"
+          autocomplete="off"
+        />
+        <button id="addBtn">Add Task</button>
+      </div>
+
+      <!-- Summary line: shows how many tasks are left to do -->
+      <p class="summary" id="summary"></p>
+
+      <!-- The list of tasks will appear here, built by JavaScript -->
+      <ul id="taskList"></ul>
+
+      <!-- Shown only when there are no tasks -->
+      <p class="empty-state" id="emptyState">
+        No tasks yet. Add one above to get started!
+      </p>
+
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

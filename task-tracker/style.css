@@ -1,0 +1,224 @@
+/* =============================================
+   CSS CUSTOM PROPERTIES (variables)
+   Change a value here and it updates everywhere.
+   ============================================= */
+:root {
+  --bg:           #f0f2f5;
+  --card-bg:      #ffffff;
+  --accent:       #4f46e5;        /* indigo – main interactive colour */
+  --accent-hover: #4338ca;
+  --danger:       #ef4444;        /* red – delete button */
+  --danger-hover: #dc2626;
+  --text-primary: #111827;
+  --text-muted:   #6b7280;
+  --border:       #e5e7eb;
+  --done-text:    #9ca3af;
+  --radius:       10px;
+  --shadow:       0 4px 24px rgba(0, 0, 0, 0.07);
+}
+
+/* =============================================
+   RESET & BASE
+   Browsers apply their own default styles;
+   this removes them so we start from scratch.
+   ============================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+/* =============================================
+   CARD CONTAINER
+   The white box everything lives inside.
+   ============================================= */
+.container {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  width: 100%;
+  max-width: 560px;         /* never wider than 560px on large screens */
+}
+
+/* =============================================
+   HEADER
+   ============================================= */
+.app-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.app-subtitle {
+  margin-top: 0.25rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* =============================================
+   INPUT ROW
+   The text field and Add button sit side by side.
+   ============================================= */
+.input-row {
+  display: flex;             /* lay children out in a row */
+  gap: 0.5rem;               /* space between input and button */
+  margin-top: 1.5rem;
+}
+
+.input-row input {
+  flex: 1;                   /* input grows to fill available space */
+  padding: 0.65rem 0.9rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-row input:focus {
+  border-color: var(--accent);  /* highlight border when user clicks in */
+}
+
+.input-row button {
+  padding: 0.65rem 1.2rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.input-row button:hover {
+  background: var(--accent-hover);
+}
+
+/* =============================================
+   SUMMARY LINE
+   e.g. "2 of 5 tasks remaining"
+   ============================================= */
+.summary {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  min-height: 1.2em;         /* reserve space so layout doesn't jump */
+}
+
+/* =============================================
+   TASK LIST
+   ============================================= */
+#taskList {
+  list-style: none;          /* remove bullet points */
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;               /* space between task items */
+}
+
+/* Each individual task row */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  transition: opacity 0.2s, border-color 0.2s;
+}
+
+.task-item:hover {
+  border-color: var(--accent);
+}
+
+/* The checkbox */
+.task-item input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--accent); /* colours the checkmark */
+  cursor: pointer;
+  flex-shrink: 0;             /* don't let it shrink on small screens */
+}
+
+/* The task text label */
+.task-label {
+  flex: 1;                   /* take up remaining space */
+  font-size: 1rem;
+  cursor: pointer;           /* clicking the label also toggles the checkbox */
+  word-break: break-word;    /* wrap long words instead of overflowing */
+}
+
+/* When a task is done, grey it out and strike through */
+.task-item.done .task-label {
+  text-decoration: line-through;
+  color: var(--done-text);
+}
+
+.task-item.done {
+  opacity: 0.75;
+}
+
+/* Delete button (the ✕) */
+.delete-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.delete-btn:hover {
+  color: var(--danger);
+  background: #fee2e2;       /* light red background on hover */
+}
+
+/* =============================================
+   EMPTY STATE
+   Shown when there are no tasks.
+   ============================================= */
+.empty-state {
+  text-align: center;
+  color: var(--text-muted);
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  padding-bottom: 0.5rem;
+}
+
+/* =============================================
+   RESPONSIVE TWEAKS
+   On narrow screens (phones), shrink padding
+   and make the button full-width.
+   ============================================= */
+@media (max-width: 480px) {
+  .container {
+    padding: 1.25rem;
+  }
+
+  .input-row {
+    flex-direction: column;  /* stack input above button */
+  }
+
+  .input-row button {
+    width: 100%;
+  }
+}
